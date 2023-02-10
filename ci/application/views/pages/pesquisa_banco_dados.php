@@ -66,24 +66,42 @@
         });
     }
 </script>
-<h1><?= $title ?></h1>
-<form id="pesquisar_nome" method="POST">
-    <input type="text" class="form-control" placeholder="Quem buscas?" name="busca" id="busca">
-    <button type="button" form="pesquisar_nome" class="btn btn-info" onclick="busca_nome()">Pesquisar</button>
-</form>
-<table id="busca_nome" class="table table-dark">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Telefone</th>
-            <th scope="col">Grupo</th>
-            <th scope="col">botão</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-sm-11">
+            <h1><?= $title ?></h1>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Quem buscas?" name="busca" id="busca">
+        </div>
+        <div class="col-sm-1">
+            <button type="button" form="pesquisar_nome" class="btn btn-info" onclick="busca_nome()">Pesquisar</button>
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-md-center">
+        <div class="col-sm-11">
+            <table id="busca_nome" class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">Grupo</th>
+                        <th scope="col">botão</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-    </tbody>
-</table>
-<div id="divNavegacao"></div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div>
+
+
+    <div id="divNavegacao"></div>
