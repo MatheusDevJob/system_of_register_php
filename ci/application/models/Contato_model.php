@@ -11,7 +11,6 @@ class Contato_model extends CI_Model
 
     public function pesquisa($busca, $inicio, $maximo)
     {
-
         $this->db->join('email', 'contato.id = email.contato_id');
         $this->db->join('telefone', 'contato.id = telefone.contato_id');
         $this->db->join('grupo_contato', 'contato.id = grupo_contato.contato_id');

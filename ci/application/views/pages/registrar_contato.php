@@ -1,22 +1,6 @@
 <style>
-    .tela_registro {
-        display: flex;
-        height: 500px;
-        align-items: center;
-        margin-left: 50px;
-    }
-
-    .tela_registro_interna {
-        width: 500px
-    }
-
-    .dados_novos {
-        position: absolute;
-        right: 50px;
-    }
-
-    .form-control-sm {
-        width: 500px;
+    input {
+        border: none;
     }
 </style>
 <script>
@@ -38,13 +22,27 @@
     function novo_email() {
         // $("#email_div").append('<label for="exampleInputEmail1">Endereço de email</label><input id="email" type="text" class="form-control email_" placeholder="Novo E-mail" name="email[]">');
         $dados = $("#email").val();
-        $(".emails_novos").append($dados + "</br>");
+        $(".alert_campos_adicionais").html('');
+        if ($dados != null && $dados != '') {
+            $("#email").val('');
+            $(".emails_novos").append('<input class="email_novo" readonly value="' + $dados + '"></br>');
+        } else {
+            $(".alert_campos_adicionais").append('<div class="alert alert-danger">E-mail não pode ser vazio.</div>');
+        }
+
     };
 
     function novo_telefone() {
-        // $("#telefone_div").append('<label for="exampleInputPassword1">Telefone</label> <input id="telefone" name="telefone" placeholder="Novo Telefone" type="tel" class="form-control telefone_">');
+        // $("#telefone_div").append('<label for="exampleInputPassword1">Telefone</label> <input id="telefone" name="telefone" placeholder="Novo Telefone" type="tel" class="form-control ">');
         $dados = $("#telefone").val();
-        $(".telefones_novos").append($dados + "</br>");
+        $(".alert_campos_adicionais").html('');
+        if ($dados != null && $dados != '') {
+            $("#telefone").val('');
+            $(".telefones_novos").append('<input class="telefone_novo" readonly value="' + $dados + '"></br>');
+        } else {
+            $(".alert_campos_adicionais").append('<div class="alert alert-danger">Telefone não pode ser vazio.</div>');
+        }
+
     };
 
     function registra() {
@@ -52,13 +50,11 @@
         let telefone = new Array();
         var contato = $('#contato').val();
         var grupo = $('#grupo').val();
-        $('.email_').each(function() {
-            var length = $(this).val().length;
-            if (!length < 1) {
-                email.push($(this).val());
-            }
+
+        $('.email_novo').each(function() {
+            email.push($(this).val());
         });
-        $('.telefone_').each(function() {
+        $('.telefone_novo').each(function() {
             telefone.push($(this).val());
         });
         $.ajax({
@@ -72,55 +68,69 @@
                 telefone: telefone
             },
             success: function(data) {
-                $(".alert").html('');
-                $(".alert").append('<div class="alert alert-primary" role="alert">Registrado com Sucesso!</div>');
+                $(".alert_registro").html('');
+                $(".alert_registro").append('<div class="alert alert-primary" role="alert">Registrado com Sucesso!</div>');
             },
             error: function(d) {
-                $(".alert").html('');
-                $(".alert").append('<div class="alert alert-primary" role="alert">Falha ao Registrar</div>');
+                $(".alert_registro").html('');
+                $(".alert_registro").append('<div class="alert alert-primary" role="alert">Falha ao Registrar</div>');
             }
         });
     }
-    $("#telefone").mask("(00) 0000-00009");
+    $("#telefone").mask("(00) 00000-0009");
 </script>
-<h1><?= $title ?></h1>
-<div class="tela_registro">
-    <div class="tela_registro_interna">
-        <form id="registro">
-            <div class="form-group alert"></div>
-            <div class="grid">
-                <div class="">
 
-                    <div id="contato_div" class="form-group">
-                        <label>Nome do Contato</label>
-                        <input id="contato" name="contato" placeholder="Seu Nome" type="text" class="form-control">
-                    </div>
-                    <div id="grupo_div" class="form-group">
-                        <label for="exampleInputPassword1">Grupo</label></br>
-                        <select id="grupo" name="grupo" class="form-control-sm"></select>
-                    </div></br>
+<body>
+    <form>
+        <div class="container alert alert-light">
+            <h1><?= $title ?></h1>
+            <div class="alert_registro" style="padding: 0;"></div>
+            <div class="alert_campos_adicionais" style="padding: 0;"></div>
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <label for="staticEmail">Nome do Contato</label>
                 </div>
-                <div class="">
-                    <div id="email_div" class="form-group">
-                        <label for="exampleInputEmail1">Endereço de email</label>
-                        <input id="email" type="email" class="form-control email_" placeholder="exemplo@exemplo.com" name="email[]">
-                    </div>
-                    <!-- botão adicionar novo e-mail -->
+                <div class="col-sm-9">
+                    <input id="contato" name="contato" placeholder="Seu Nome" type="text" class="form-control ">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="exampleInputPassword1">Grupo</label></br>
+                <div class="col-sm-9">
+                    <select id="grupo" name="grupo" class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="exampleInputEmail1">Endereço de email</label>
+                <div class="col-sm-9">
+                    <input id="email" type="email" class="form-control email_" placeholder="exemplo@exemplo.com" name="email[]">
+                </div>
+                <div class="col-sm-1">
                     <button onclick="novo_email()" type="button" id="add_campo_email" class="btn btn-secondary">+</button>
-                    <div id="telefone_div" class="form-group">
-                        <label for="exampleInputPassword1">Telefone</label>
-                        <input id="telefone" name="tel[]" placeholder="Seu Telefone" type="tel" class="form-control telefone_" pattern="([0-9]{2})[s](0-9){4}-(0-9){4,5}">
-                    </div>
-                    <!-- botão adicionar novo telefone -->
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Telefone</label>
+                <div class="col-sm-9">
+                    <input id="telefone" name="tel[]" placeholder="Seu Telefone" type="tel" class="form-control telefone_" pattern="([0-9]{2})[s](0-9){4}-(0-9){4,5}">
+                </div>
+                <div class="col-sm-1">
                     <button onclick="novo_telefone()" type="button" id="add_campo_telefone" class="btn btn-secondary">+</button>
                 </div>
             </div>
-
+            <br>
             <button type="button" form="registro" onclick="registra()" class="btn btn-success">Registrar</button>
-        </form>
-    </div>
-    <div class="form-group dados_novos">
-        <div class="emails_novos"></div>
-        <div class="telefones_novos"></div>
-    </div>
-</div>
+            <br> <br>
+            <div class="form-group row">
+                <div class="col">
+                    <label for="exampleInputPassword1" class="col-form-label">E-mails Adicionais</label>
+                    <div class="emails_novos"></div>
+                </div>
+                <div class="col">
+                    <label for="exampleInputPassword1" class="col-form-label">Telefones Adicionais</label>
+                    <div class="telefones_novos"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
