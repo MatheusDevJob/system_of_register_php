@@ -1,6 +1,9 @@
 <style>
-    #grupo {
+    #grupo, #grupo_div, #grupo_div_botao_confir{
         margin: 1em 0 1em 0;
+    }
+    #body {
+        margin-top: 1em;
     }
 </style>
 <script>
@@ -10,6 +13,7 @@
 
     function pesquisa_grupos_para_tela() {
 
+        // $('#grupo').html('<i class="fa-spinner"></i>'); falta adicionar api para icones
         $.ajax({
             url: '<?= base_url() ?>grupo/lista_grupos',
             type: 'POST',
@@ -44,11 +48,12 @@
             error: function(d) {
                 console.log(d);
                 $(".alert").html('');
-                $(".alert").append('<div class="alert alert-primary" role="alert">Falha ao Deletar</div>');
+                $(".alert").append('<div class="alert alert-primary" role="alert">Não foi possível deletar. Grupo em uso.</div>');
             }
         });
         $("#grupo").html('');
         pesquisa_grupos_para_tela();
+        timeAlert();
     }
 
 
@@ -76,6 +81,7 @@
             }
         });
         pesquisa_grupos_para_tela();
+        timeAlert();
     }
 
     function atualiza_grupos() {
@@ -99,41 +105,47 @@
             success: function(data) {
                 $(".alert").html('');
                 $(".alert").append('<div class="alert alert-primary" role="alert">Atualizado com Sucesso!</div>');
-                setTimeout(function(){
-                    $(".alert").html('');
-                }, 3000);
             },
             error: function(d) {
                 $(".alert").html('');
                 $(".alert").append('<div class="alert alert-primary" role="alert">Falha ao Atualizar</div>');
-                setTimeout(function(){
-                    $(".alert").html('');
-                }, 3000);
             }
         });
+        pesquisa_grupos_para_tela();
+        timeAlert();
+    }
+
+    function timeAlert() {
+        setTimeout(function() {
+            $(".alert").html('');
+        }, 3000);
     }
 </script>
 
 <body>
-    <div class="container">
+    <div id="body" class="container alert alert-light">
         <h1><?= $title ?></h1>
         <div class="form-group alert"></div>
         <div class="row">
             <div class="col-sm-6">
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#registro" aria-expanded="false">Registro</button>
+                <label>
+                    <h2>Novo Grupo</h2>
+                </label>
                 <div class="area_grupos">
                     <ul id="grupo" class="list-group list-group-flush grupo"></ul>
                 </div>
                 <button class="btn btn-dark" onclick="atualiza_grupos()">Atualizar</button>
             </div>
             <div class="col-sm-6">
-                <form id="registro" method="POST" class="collapse">
+                <form id="registro" method="POST">
                     <div class="row">
-                        <label><h2>Novo Grupo</h2></label>
+                        <label>
+                            <h2>Novo Grupo</h2>
+                        </label>
                         <div id="grupo_div" class="col-sm-8">
                             <input id="novo_grupo" name="novo_grupo" placeholder="novo_grupo" type="text" class="form-control grupos" require>
                         </div>
-                        <div class="col-sm-2">
+                        <div id="grupo_div_botao_confir" class="col-sm-2">
                             <button type="button" class="btn btn-success" onclick="registra_grupo()">Confirmar</button>
                         </div>
                     </div>

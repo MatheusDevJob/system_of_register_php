@@ -2,6 +2,9 @@
     input {
         border: none;
     }
+    #body {
+        margin-top: 1em;
+    }
 </style>
 <script>
     $(document).ready(function() {
@@ -82,7 +85,7 @@
 
 <body>
     <form>
-        <div class="container alert alert-light">
+        <div id="body" class="container alert alert-light">
             <h1><?= $title ?></h1>
             <div class="alert_registro" style="padding: 0;"></div>
             <div class="alert_campos_adicionais" style="padding: 0;"></div>
