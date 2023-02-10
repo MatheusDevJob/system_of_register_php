@@ -1,0 +1,14 @@
+.background{
+    display: flex;
+    justify-content: center;
+}
+.corpo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+    width: 800px;
+}
+.left{
+    margin-right: 20px;
+}
