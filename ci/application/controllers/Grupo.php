@@ -78,9 +78,7 @@ class Grupo extends CI_Controller
     public function confirma_grupo()
     {
         $dados = $this->input->post();
-        $this->grupo_model->update_grupo($dados['grupos'], $dados['grupos_id']);
-        // array_map(function ($v1, $v2){
-        //     $this->grupo_model->();
-        // }, $dados['grupos'], $dados['grupos_id']);
+        $return = $this->grupo_model->update_grupo($dados['grupos'], $dados['grupos_id']);
+        echo json_encode($return, JSON_UNESCAPED_UNICODE);
     }
 }

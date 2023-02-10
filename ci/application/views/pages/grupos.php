@@ -1,9 +1,6 @@
 <style>
-    .area_grupos {
-        width: 400px;
-    }
-    .button_delete{
-        margin: 5px;
+    #grupo {
+        margin: 1em 0 1em 0;
     }
 </style>
 <script>
@@ -20,11 +17,12 @@
             success: function(data) {
                 var event_data = '';
                 $.each(data, function(key, value) {
-                    event_data += '<div class= "option_grupo' + value.id + '">';
-                    event_data += '<input value="' + value.descricao + '" type="text" class="input_grupo">';
-                    event_data += '<input value="' + value.id + '" type="hidden" class="input_grupo_id">';
-                    event_data += '<button class="btn btn-dark button_delete" onclick="deleta_grupo(' + value.id + ')">Deleta</button></div>';
+                    event_data += '<div class="row"><div class= "option_grupo' + value.id + ' col-sm-10">';
+                    event_data += '<input value="' + value.descricao + '" type="text" class="form-control input_grupo" style="margin-bottom: 3px;">';
+                    event_data += '<input value="' + value.id + '" type="hidden" class="input_grupo_id"></div>';
+                    event_data += '<div class="col-sm-1"><button class="btn btn-dark button_delete" onclick="deleta_grupo(' + value.id + ')">Deleta</button></div></div>';
                 });
+                $('#grupo').html('');
                 $('#grupo').append(event_data);
             }
         });
@@ -70,12 +68,14 @@
             success: function(data) {
                 $(".alert").html('');
                 $(".alert").append('<div class="alert alert-primary" role="alert">Registrado com Sucesso!</div>');
+
             },
             error: function(d) {
                 $(".alert").html('');
                 $(".alert").append('<div class="alert alert-primary" role="alert">Falha ao Registrar</div>');
             }
         });
+        pesquisa_grupos_para_tela();
     }
 
     function atualiza_grupos() {
@@ -99,25 +99,46 @@
             success: function(data) {
                 $(".alert").html('');
                 $(".alert").append('<div class="alert alert-primary" role="alert">Atualizado com Sucesso!</div>');
+                setTimeout(function(){
+                    $(".alert").html('');
+                }, 3000);
             },
             error: function(d) {
                 $(".alert").html('');
                 $(".alert").append('<div class="alert alert-primary" role="alert">Falha ao Atualizar</div>');
+                setTimeout(function(){
+                    $(".alert").html('');
+                }, 3000);
             }
         });
     }
 </script>
-<h1><?= $title ?></h1>
-<div class="form-group alert"></div>
-<form id="registro" method="POST" class="collapse">
-    <div id="grupo_div" class="form-group">
-        <label>Novo Grupo</label>
-        <input id="novo_grupo" name="novo_grupo" placeholder="novo_grupo" type="text" class="form-control grupos" require>
+
+<body>
+    <div class="container">
+        <h1><?= $title ?></h1>
+        <div class="form-group alert"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#registro" aria-expanded="false">Registro</button>
+                <div class="area_grupos">
+                    <ul id="grupo" class="list-group list-group-flush grupo"></ul>
+                </div>
+                <button class="btn btn-dark" onclick="atualiza_grupos()">Atualizar</button>
+            </div>
+            <div class="col-sm-6">
+                <form id="registro" method="POST" class="collapse">
+                    <div class="row">
+                        <label><h2>Novo Grupo</h2></label>
+                        <div id="grupo_div" class="col-sm-8">
+                            <input id="novo_grupo" name="novo_grupo" placeholder="novo_grupo" type="text" class="form-control grupos" require>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-success" onclick="registra_grupo()">Confirmar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <button type="button" class="btn btn-success" onclick="registra_grupo()">Confirmar</button>
-</form></br>
-<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#registro" aria-expanded="false">Registro</button>
-<div class="area_grupos">
-    <ul id="grupo" class="list-group list-group-flush grupo"></ul>
-</div>
-<button class="btn btn-dark" onclick="atualiza_grupos()">Atualizar</button>
+</body>
