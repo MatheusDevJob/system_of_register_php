@@ -4,5 +4,8 @@
 <script src="../../../assets/ajax.js"></script>
 <script src=""></script>
 </body>
+<footer id="footer">
+    <p style="text-align: center;">&copy; <?= date('Y'); ?> Copyright: Matheus Henrique</p>
+</footer>
 
 </html>

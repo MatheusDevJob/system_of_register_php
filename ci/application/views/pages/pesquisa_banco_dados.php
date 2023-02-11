@@ -6,7 +6,7 @@
     function busca_nome(inicio = 0) {
         var nome = $('#busca').val();
         $.ajax({
-            url: '<?= base_url() ?>contato/pesquisa',
+            url: '<?= base_url() ?>contato/pesquisa_contatos',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -29,6 +29,7 @@
                 $("#divNavegacao").html('');
                 var botaoNevegacao = '';
                 if (data.numPaginas > 1) {
+                    console.log(data.navegacao);
                     botaoNevegacao += ' <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">';
                     botaoNevegacao += '<div class="btn-group mr-2" role="group" aria-label="First group">';
                     if (data.navegacao.anterior != null) {
@@ -66,21 +67,29 @@
         });
     }
 </script>
-<div class="container-fluid">
+<div class="container-fluid alert alert-dark">
+
     <div class="row justify-content-md-center">
         <div class="col-sm-11">
             <h1><?= $title ?></h1>
         </div>
     </div>
     <div class="row justify-content-md-center">
-        <div class="col-sm-10">
+
+    </div>
+    <br>
+    <div class="row justify-content-md-center">
+        <div class="col-sm-3">
+            <div id="divNavegacao"></div>
+        </div>
+        <div class="col-sm-5"></div>
+        <div class="col-sm-2">
             <input type="text" class="form-control" placeholder="Quem buscas?" name="busca" id="busca">
         </div>
         <div class="col-sm-1">
             <button type="button" form="pesquisar_nome" class="btn btn-info" onclick="busca_nome()">Pesquisar</button>
         </div>
     </div>
-    <br>
     <div class="row justify-content-md-center">
         <div class="col-sm-11">
             <table id="busca_nome" class="table table-dark">
@@ -100,8 +109,9 @@
             </table>
         </div>
     </div>
+    <div class="row justify-content-md-center">
+        <div class="col-sm-11">
+            <div id="divNavegacao2"></div>
+        </div>
+    </div>
 </div>
-<div>
-
-
-    <div id="divNavegacao"></div>

@@ -1,9 +1,16 @@
 <style>
-    #grupo, #grupo_div, #grupo_div_botao_confir{
+    #grupo,
+    #grupo_div,
+    #grupo_div_botao_confir {
         margin: 1em 0 1em 0;
     }
+
     #body {
         margin-top: 1em;
+    }
+
+    form {
+        margin-top: 6%;
     }
 </style>
 <script>
@@ -24,7 +31,7 @@
                     event_data += '<div class="row"><div class= "option_grupo' + value.id + ' col-sm-10">';
                     event_data += '<input value="' + value.descricao + '" type="text" class="form-control input_grupo" style="margin-bottom: 3px;">';
                     event_data += '<input value="' + value.id + '" type="hidden" class="input_grupo_id"></div>';
-                    event_data += '<div class="col-sm-1"><button class="btn btn-dark button_delete" onclick="deleta_grupo(' + value.id + ')">Deleta</button></div></div>';
+                    event_data += '<div class="col-sm-1"><button class="btn btn-dark button_delete" onclick="deleta_grupo(' + value.id + ')">Deletar</button></div></div>';
                 });
                 $('#grupo').html('');
                 $('#grupo').append(event_data);
@@ -122,19 +129,22 @@
     }
 </script>
 
-<body>
-    <div id="body" class="container alert alert-light">
+
+<form>
+    <div id="body" class="container alert alert-dark">
         <h1><?= $title ?></h1>
         <div class="form-group alert"></div>
         <div class="row">
             <div class="col-sm-6">
                 <label>
-                    <h2>Novo Grupo</h2>
+                    <h2>Editar Grupos</h2>
                 </label>
                 <div class="area_grupos">
                     <ul id="grupo" class="list-group list-group-flush grupo"></ul>
                 </div>
-                <button class="btn btn-dark" onclick="atualiza_grupos()">Atualizar</button>
+                <div class="col-sm-12" style="text-align: right;">
+                    <button class="btn btn-dark" onclick="atualiza_grupos()">Atualizar</button>
+                </div>
             </div>
             <div class="col-sm-6">
                 <form id="registro" method="POST">
@@ -153,4 +163,4 @@
             </div>
         </div>
     </div>
-</body>
+</form>

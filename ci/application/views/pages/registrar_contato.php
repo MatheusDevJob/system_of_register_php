@@ -2,8 +2,17 @@
     input {
         border: none;
     }
+
     #body {
         margin-top: 1em;
+    }
+
+    .form-group {
+        margin-bottom: 3px;
+    }
+
+    form {
+        margin-top: 6%;
     }
 </style>
 <script>
@@ -82,58 +91,55 @@
     }
     $("#telefone").mask("(00) 00000-0009");
 </script>
-
-<body>
-    <form>
-        <div id="body" class="container alert alert-light">
-            <h1><?= $title ?></h1>
-            <div class="alert_registro" style="padding: 0;"></div>
-            <div class="alert_campos_adicionais" style="padding: 0;"></div>
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <label for="staticEmail">Nome do Contato</label>
-                </div>
-                <div class="col-sm-9">
-                    <input id="contato" name="contato" placeholder="Seu Nome" type="text" class="form-control ">
-                </div>
+<form>
+    <div id="body" class="container alert alert-dark">
+        <h1><?= $title ?></h1>
+        <div class="alert_registro" style="padding: 0;"></div>
+        <div class="alert_campos_adicionais" style="padding: 0;"></div>
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label for="staticEmail">Nome do Contato</label>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="exampleInputPassword1">Grupo</label></br>
-                <div class="col-sm-9">
-                    <select id="grupo" name="grupo" class="form-control"></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="exampleInputEmail1">Endereço de email</label>
-                <div class="col-sm-9">
-                    <input id="email" type="email" class="form-control email_" placeholder="exemplo@exemplo.com" name="email[]">
-                </div>
-                <div class="col-sm-1">
-                    <button onclick="novo_email()" type="button" id="add_campo_email" class="btn btn-secondary">+</button>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Telefone</label>
-                <div class="col-sm-9">
-                    <input id="telefone" name="tel[]" placeholder="Seu Telefone" type="tel" class="form-control telefone_" pattern="([0-9]{2})[s](0-9){4}-(0-9){4,5}">
-                </div>
-                <div class="col-sm-1">
-                    <button onclick="novo_telefone()" type="button" id="add_campo_telefone" class="btn btn-secondary">+</button>
-                </div>
-            </div>
-            <br>
-            <button type="button" form="registro" onclick="registra()" class="btn btn-success">Registrar</button>
-            <br> <br>
-            <div class="form-group row">
-                <div class="col">
-                    <label for="exampleInputPassword1" class="col-form-label">E-mails Adicionais</label>
-                    <div class="emails_novos"></div>
-                </div>
-                <div class="col">
-                    <label for="exampleInputPassword1" class="col-form-label">Telefones Adicionais</label>
-                    <div class="telefones_novos"></div>
-                </div>
+            <div class="col-sm-9">
+                <input id="contato" name="contato" placeholder="Seu Nome" type="text" class="form-control ">
             </div>
         </div>
-    </form>
-</body>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="exampleInputPassword1">Grupo</label></br>
+            <div class="col-sm-9">
+                <select id="grupo" name="grupo" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="exampleInputEmail1">Endereço de email</label>
+            <div class="col-sm-9">
+                <input id="email" type="email" class="form-control email_" placeholder="exemplo@exemplo.com" name="email[]">
+            </div>
+            <div class="col-sm-1">
+                <button onclick="novo_email()" type="button" id="add_campo_email" class="btn btn-secondary">+</button>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Telefone</label>
+            <div class="col-sm-9">
+                <input id="telefone" name="tel[]" placeholder="Seu Telefone" type="tel" class="form-control telefone_" pattern="([0-9]{2})[s](0-9){4}-(0-9){4,5}">
+            </div>
+            <div class="col-sm-1">
+                <button onclick="novo_telefone()" type="button" id="add_campo_telefone" class="btn btn-secondary">+</button>
+            </div>
+        </div>
+        <br>
+        <button type="button" form="registro" onclick="registra()" class="btn btn-success">Registrar</button>
+        <br> <br>
+        <div class="form-group row">
+            <div class="col">
+                <label for="exampleInputPassword1" class="col-form-label">E-mails Adicionais</label>
+                <div class="emails_novos"></div>
+            </div>
+            <div class="col">
+                <label for="exampleInputPassword1" class="col-form-label">Telefones Adicionais</label>
+                <div class="telefones_novos"></div>
+            </div>
+        </div>
+    </div>
+</form>

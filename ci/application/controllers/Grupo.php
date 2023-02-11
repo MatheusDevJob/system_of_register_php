@@ -11,7 +11,7 @@ class Grupo extends CI_Controller
     public function registrar_grupo()
     {
         permicao();
-        $dados['title'] = 'Registrar Grupos';
+        $dados['title'] = 'Grupos';
         $dados['pesquisa'] = 'nav-link';
         $dados['contato'] = 'nav-link';
         $dados['grupo'] = 'nav-link active';

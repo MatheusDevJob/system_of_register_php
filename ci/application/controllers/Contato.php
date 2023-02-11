@@ -26,7 +26,7 @@ class Contato extends CI_Controller
 
     function pesquisar()
     {
-        $dados['title'] = 'Pesquisa Contato';
+        $dados['title'] = 'Contatos Registrados';
         $dados['pesquisa'] = 'nav-link active';
         $dados['contato'] = 'nav-link';
         $dados['grupo'] = 'nav-link';
@@ -95,7 +95,7 @@ class Contato extends CI_Controller
         echo json_encode($return, JSON_UNESCAPED_UNICODE);
     }
 
-    public function pesquisa()
+    public function pesquisa_contatos()
     {
         $post = $this->input->post('nome');
         $inicio = $this->input->post('inicio');
@@ -108,7 +108,7 @@ class Contato extends CI_Controller
         $total = $this->contato_model->count_tabela_clientes();
 
         if (!empty($total)) {
-            $numPaginas = $total / $maximo;
+            $numPaginas = ceil($total / $maximo);
             if ($numPaginas > 5) {
 
                 if ($inicio <= 3 * $maximo) {
@@ -145,7 +145,7 @@ class Contato extends CI_Controller
         } else if ($inicio == 0) {
             $navegacao['anterior'] = null;
             $navegacao['proximo'] = $inicio + $maximo;
-        } else if ($inicio >= $total) {
+        } else if ($inicio >= $total or ($total - $inicio) <= 30) {
             $navegacao['anterior'] = $inicio - $maximo;
             $navegacao['proximo'] = null;
         } else if (($inicio > 0) && ($inicio < $total)) {

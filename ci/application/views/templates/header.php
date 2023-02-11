@@ -28,9 +28,22 @@
             margin-left: 20px;
         }
 
+        .perfil_link {
+            text-decoration: none;
+        }
+
+        .close {
+            border: 1px solid rgba(0, 0, 0, 0.5);
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 2.5rem;
+        }
     </style>
 
 </head>
 
 <body>
-    
